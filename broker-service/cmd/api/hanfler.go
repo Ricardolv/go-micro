@@ -8,7 +8,7 @@ import (
 type jsonResponse struct {
 	Error   bool   `json:"error"`
 	Message string `json:"message"`
-	Data    any    `json:"data"`
+	Data    any    `json:"data,omitempty"`
 }
 
 func (app *Config) Broker(w http.ResponseWriter, req *http.Request) {

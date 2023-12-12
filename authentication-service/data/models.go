@@ -4,10 +4,9 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"golang.org/x/crypto/bcrypt"
 	"log"
 	"time"
-
-	"golang.org/x/crypto/bcrypt"
 )
 
 const dbTimeout = time.Second * 3
@@ -48,8 +47,7 @@ func (u *User) GetAll() ([]*User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
 	defer cancel()
 
-	query := `select id, email, first_name, last_name, password, user_active, created_at, updated_at
-	from users order by last_name`
+	query := `select id, email, first_name, last_name, password, user_active, created_at, updated_at from users order by last_name`
 
 	rows, err := db.QueryContext(ctx, query)
 	if err != nil {

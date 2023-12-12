@@ -5,7 +5,7 @@ services:
     build:
       context: ./../broker-service
       dockerfile: ./../broker-service/broker-service.dockerfile
-    container_name: broker-servic
+    container_name: broker-service
     restart: always
     ports:
       - "8080:80"

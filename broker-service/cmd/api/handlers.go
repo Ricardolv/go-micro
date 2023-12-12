@@ -40,7 +40,7 @@ func (app *Config) HandleSubmission(w http.ResponseWriter, req *http.Request) {
 	case "auth":
 		app.authenticate(w, requestPayload.Auth)
 	default:
-		app.errorJSON(w, errors.New("unknow action"))
+		app.errorJSON(w, errors.New("unknown action"))
 	}
 }
 
@@ -65,7 +65,7 @@ func (app *Config) authenticate(w http.ResponseWriter, a AuthPayload) {
 
 	// make sure we get back the correct status code
 	if response.StatusCode == http.StatusUnauthorized {
-		app.errorJSON(w, errors.New("invalis credentials"))
+		app.errorJSON(w, errors.New("invalid credentials"))
 		return
 	} else if response.StatusCode != http.StatusAccepted {
 		app.errorJSON(w, errors.New("error calling auth service"))
@@ -89,7 +89,7 @@ func (app *Config) authenticate(w http.ResponseWriter, a AuthPayload) {
 
 	var payload jsonResponse
 	payload.Error = false
-	payload.Message = "Autenticated!"
+	payload.Message = "Authenticated!"
 	payload.Data = jsonFromService.Data
 
 	app.writeJSON(w, http.StatusAccepted, payload)
